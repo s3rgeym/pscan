@@ -4,7 +4,7 @@ Simple and fast TCP port scanner written in Golang.
 
 ## Precompiled Binaries For Linux
 
-[Latest release](https://github.com/tz4678/scan-tools/releases/latest).
+[Latest release](https://github.com/tz4678/pscan/releases/latest).
 
 ## Manual Install
 
