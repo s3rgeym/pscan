@@ -11,7 +11,6 @@ Simple and fast TCP port scanner written in Golang.
 ```zsh
 $ make build
 $ sudo make install
-$ sudo make uninstall
 ```
 
 ## Usage
