@@ -23,7 +23,7 @@ $ pscan 103.1.172.0/22 -p 22 -c 10000 -l 10000
 ...
 ```
 
-IP Ranges: `x.x.x.x/x`, `x.x.x.x-x.x.x.x`.
+IP Ranges: `X.X.X.X/X`, `X.X.X.X-X.X.X.X`.
 
 Help:
 
