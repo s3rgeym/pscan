@@ -15,5 +15,9 @@ func main() {
 	if err != nil {
 		os.Exit(1)
 	}
-	internal.Run(opts, args)
+	// не очень красиво сделано
+	if err := internal.Run(opts, args); err != nil {
+		panic(err)
+	}
+	os.Exit(0)
 }
