@@ -13,20 +13,20 @@ import (
 )
 
 // Run fn
-func Run(opts *Options, args []string) {
+func Run(opts *Options, args []string) error {
 	if opts.Input != "" {
 		filename, err := utils.ExpandPath(string(opts.Input))
 		if err != nil {
-			panic(err)
+			return err
 		}
 		file, err := os.Open(filename)
 		if err != nil {
-			panic(err)
+			return err
 		}
 		defer file.Close()
 		lines, err := utils.ReadLines(file)
 		if err != nil {
-			panic(err)
+			return err
 		}
 		args = append(args, lines...)
 	}
@@ -40,7 +40,7 @@ func Run(opts *Options, args []string) {
 		if strings.ContainsAny(arg, "-/") {
 			ipRange, err := utils.GetIPRange(arg)
 			if err != nil {
-				panic(err)
+				return err
 			}
 			hosts = append(hosts, ipRange...)
 		} else {
@@ -53,17 +53,17 @@ func Run(opts *Options, args []string) {
 	} else {
 		filename, err := utils.ExpandPath(string(opts.Output))
 		if err != nil {
-			panic(err)
+			return err
 		}
 		file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
-			panic(err)
+			return err
 		}
 		defer file.Close()
 		out = file
 	}
-	// fmt.Printf("%#v\n", hosts)
 	hostsLen := len(hosts)
+	fmt.Printf("Total: %d\n", hostsLen)
 	concurrency := utils.Min(opts.Concurrency, hostsLen)
 	jobs := make(chan string, concurrency)
 	go func() {
@@ -88,6 +88,7 @@ func Run(opts *Options, args []string) {
 		w.WriteString(fmt.Sprintf("%s\n", result))
 		w.Flush()
 	}
+	return nil
 }
 
 // Worker fn
