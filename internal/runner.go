@@ -16,7 +16,7 @@ var octetPattern = `\d{1,3}`
 var ipPattern = octetPattern + `\.` + octetPattern + `\.` + octetPattern + `\.` + octetPattern
 
 // x.x.x.x OR x.x.x.x-x.x.x.x OR  x.x.x.x/x
-var ipOrRangeRegex, _ = regexp.Compile(`^` + ipPattern + `(?:-` + ipPattern + `|/\d+)?$`)
+var ipRangeRegex, _ = regexp.Compile(`^` + ipPattern + `(?:-` + ipPattern + `|/\d+)$`)
 
 // Run fn
 func Run(opts *Options, args []string) error {
@@ -41,7 +41,7 @@ func Run(opts *Options, args []string) error {
 		if arg == "" {
 			continue
 		}
-		if ipOrRangeRegex.MatchString(arg) {
+		if ipRangeRegex.MatchString(arg) {
 			ipRange, err := utils.GetIPRange(arg)
 			if err != nil {
 				return err
