@@ -15,7 +15,7 @@ import (
 var octetPattern = `\d{1,3}`
 var ipPattern = octetPattern + `\.` + octetPattern + `\.` + octetPattern + `\.` + octetPattern
 
-// x.x.x.x OR x.x.x.x-x.x.x.x OR  x.x.x.x/x
+// x.x.x.x-x.x.x.x OR  x.x.x.x/x
 var ipRangeRegex, _ = regexp.Compile(`^` + ipPattern + `(?:-` + ipPattern + `|/\d+)$`)
 
 // Run fn
